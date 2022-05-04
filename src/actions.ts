@@ -321,7 +321,7 @@ export const getCurrentLocation = (position: any) => {
 };
 
 // Determines whether or not the list is shown or not, when the button "SEARCH BY" is clicked.
-export const cookieConsentStatus = (status: any) => {
+export const cookieConsentStatus = (status: boolean | null) => {
   return async (dispatch: Dispatch) => {
     if (status === false) {
       return dispatch({
