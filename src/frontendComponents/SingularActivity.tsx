@@ -13,7 +13,27 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/ActivityListTheme";
 
-export default function SingularActivity(props: any) {
+type SATypes = {
+  id: number;
+  name: string;
+  type: string;
+  description: string;
+  distance: number;
+  price: number;
+  city: string;
+  municipality: string;
+  county: string;
+  open_hours: string;
+  closing_hours: string;
+  website_link: string;
+  phone: number;
+  country: string;
+  subregion: string;
+  region: string;
+  geolocation: string;
+};
+
+export default function SingularActivity(props: SATypes) {
   return (
     <ThemeProvider theme={theme}>
       <Card key={props.id} id={"AL" + props.id}>
