@@ -269,11 +269,11 @@ export const accuracySuccess = (position: string | null) => {
 
 export const getCurrentLocation = (position: any) => {
   return async (dispatch: Dispatch) => {
-    let searchResultNU = [];
-    let latArr = [];
-    let lonArr = [];
-    let k;
-    let userInput = (
+    let searchResultNU: any[] = [];
+    let latArr: number[] = [];
+    let lonArr: number[] = [];
+    let k: number;
+    let userInput: string = (
       document.getElementById("filterInputNU") as HTMLInputElement
     ).value;
 
@@ -290,24 +290,24 @@ export const getCurrentLocation = (position: any) => {
     });
 
     for (k = 0; k < latArr.length; k++) {
-      const lat1 = activityArr[k].latitude;
-      const lon1 = activityArr[k].longitude;
-      const lat2 = position.coords.latitude;
-      const lon2 = position.coords.longitude;
+      const lat1: number = activityArr[k].latitude;
+      const lon1: number = activityArr[k].longitude;
+      const lat2: number = position.coords.latitude;
+      const lon2: number = position.coords.longitude;
 
-      const R = 6371e3; // metres
-      const φ1 = (lat1 * Math.PI) / 180; // φ, λ in radians
-      const φ2 = (lat2 * Math.PI) / 180;
-      const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-      const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+      const R: number = 6371e3; // metres
+      const φ1: number = (lat1 * Math.PI) / 180; // φ, λ in radians
+      const φ2: number = (lat2 * Math.PI) / 180;
+      const Δφ: number = ((lat2 - lat1) * Math.PI) / 180;
+      const Δλ: number = ((lon2 - lon1) * Math.PI) / 180;
 
-      const a =
+      const a: number =
         Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
         Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-      const d = R * c; // in metres
-      const kmConverstion = d / 1000;
+      const d: number = R * c; // in metres
+      const kmConverstion: number = d / 1000;
 
       if (kmConverstion < userInputToNumber) {
         searchResultNU.push(getLocalStorageNU[k]);
