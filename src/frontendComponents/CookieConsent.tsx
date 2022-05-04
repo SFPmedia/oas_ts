@@ -26,7 +26,7 @@ export default function CookieConsent() {
   };
 
   const handleCookieConsentDisplay = () => {
-    const cookieConsentCurrentStatus = localStorage.getItem(
+    const cookieConsentCurrentStatus: string | null = localStorage.getItem(
       "CookieConsentStatus"
     );
     if (cookieConsentCurrentStatus === "true") {
