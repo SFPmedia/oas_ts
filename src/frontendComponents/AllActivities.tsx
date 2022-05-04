@@ -48,7 +48,7 @@ export default function AllActivities() {
     dispatch(filterActivityList(searchInput));
   };
 
-  // searchSelectColor() simply highlights the color of the selected search criteria.
+  // searchSelectColor() highlights the color of the selected search criteria.
   const searchSelectColor = (searchColor: string) => {
     if (searchInput === searchColor) {
       return "rgba(255, 222, 113, 1)";
