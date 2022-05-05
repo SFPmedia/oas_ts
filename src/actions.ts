@@ -280,7 +280,7 @@ export const getCurrentLocation = (position: any) => {
     let userInputToNumber: number = parseInt(userInput);
 
     const getLocalStorageNU: string[] | null = JSON.parse(
-      localStorage.getItem("activities") || "{}"
+      localStorage.getItem("activities")!
     );
     const activityArr: Array<any> = getLocalStorageNU!;
 
@@ -290,8 +290,8 @@ export const getCurrentLocation = (position: any) => {
     });
 
     for (k = 0; k < latArr.length; k++) {
-      const lat1: number = activityArr[k].latitude;
-      const lon1: number = activityArr[k].longitude;
+      const lat1: number = parseFloat(activityArr[k].latitude);
+      const lon1: number = parseFloat(activityArr[k].longitude);
       const lat2: number = position.coords.latitude;
       const lon2: number = position.coords.longitude;
 
