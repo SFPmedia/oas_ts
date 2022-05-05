@@ -279,10 +279,10 @@ export const getCurrentLocation = (position: any) => {
 
     let userInputToNumber: number = parseInt(userInput);
 
-    const getLocalStorageNU = JSON.parse(
+    const getLocalStorageNU: string[] | null = JSON.parse(
       localStorage.getItem("activities") || "{}"
     );
-    const activityArr = getLocalStorageNU;
+    const activityArr: Array<any> = getLocalStorageNU!;
 
     activityArr.map((singularActivityArr: any) => {
       latArr.push(singularActivityArr.latitude);
@@ -310,7 +310,7 @@ export const getCurrentLocation = (position: any) => {
       const kmConverstion: number = d / 1000;
 
       if (kmConverstion < userInputToNumber) {
-        searchResultNU.push(getLocalStorageNU[k]);
+        searchResultNU.push(getLocalStorageNU![k]);
       }
     }
     return dispatch({
