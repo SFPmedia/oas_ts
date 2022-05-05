@@ -269,7 +269,7 @@ export const accuracySuccess = (position: string | null) => {
 
 export const getCurrentLocation = (position: any) => {
   return async (dispatch: Dispatch) => {
-    let searchResultNU: any[] = [];
+    let searchResultNU: Array<any> = [];
     let latArr: number[] = [];
     let lonArr: number[] = [];
     let k: number;
