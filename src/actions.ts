@@ -7,14 +7,14 @@ import { Dispatch } from "redux";
 export const fetchActivities = () => {
   return async (dispatch: Dispatch) => {
     let localStorageExpirationTimeToNumber: number = JSON.parse(
-      localStorage.getItem("lsExpirationTime") || "{}"
+      localStorage.getItem("lsExpirationTime")!
     );
     if (
       localStorage.getItem("activities") &&
       new Date().getTime() <= localStorageExpirationTimeToNumber
     ) {
       const getLocalStorage: object = JSON.parse(
-        localStorage.getItem("activities") || "{}"
+        localStorage.getItem("activities")!
       );
       const activities = getLocalStorage;
       dispatch({
@@ -41,7 +41,7 @@ export const fetchActivities = () => {
             JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
           );
           const getLocalStorage: string = JSON.parse(
-            localStorage.getItem("activities") || "{}"
+            localStorage.getItem("activities")!
           );
           const activities = getLocalStorage;
           console.log(
