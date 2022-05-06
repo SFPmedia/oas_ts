@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/ActivityListTheme";
 
-type SATypes = {
+interface SATypes {
   id: number;
   name: string;
   type: string;
@@ -31,7 +31,7 @@ type SATypes = {
   subregion: string;
   region: string;
   geolocation: string;
-};
+}
 
 export default function SingularActivity(props: SATypes) {
   return (
