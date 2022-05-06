@@ -77,7 +77,7 @@ export const forceUpdateActivities = () => {
           JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
         );
         const getLocalStorage: object = JSON.parse(
-          localStorage.getItem("activities") || "{}"
+          localStorage.getItem("activities")!
         );
         const activities = getLocalStorage;
         console.log("Forced update of localstorage data and react state.");
@@ -104,9 +104,7 @@ export const filterActivityList = (searchInputProp: string) => {
       document.getElementById("filterInput") as HTMLInputElement
     ).value;
 
-    const getLocalStorage = JSON.parse(
-      localStorage.getItem("activities") || ""
-    );
+    const getLocalStorage = JSON.parse(localStorage.getItem("activities")!);
     let searchResult: string[] = [];
 
     const searchInput: string = searchInputProp;
