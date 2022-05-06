@@ -13,10 +13,9 @@ import {
   searchSelect,
   searchSelectVisible,
 } from "../actions";
-import { store } from "../index";
+import { RootState, AppDispatch } from "../customTypes";
 
 export default function AllActivities() {
-  type RootState = ReturnType<typeof store.getState>;
   const activities = useSelector<RootState, string[]>(
     (state) => state.activities
   );
@@ -30,7 +29,6 @@ export default function AllActivities() {
     (state) => state.searchSelectVisibleStatus
   );
 
-  type AppDispatch = typeof store.dispatch;
   const dispatch: AppDispatch = useDispatch();
 
   const handleSearchSelectVisible = () => {

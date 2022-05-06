@@ -10,10 +10,9 @@ import SingularActivity from "./SingularActivity";
 import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentLocation } from "../actions";
-import { store } from "../index";
+import { RootState, AppDispatch } from "../customTypes";
 
 export default function AllActivities() {
-  type RootState = ReturnType<typeof store.getState>;
   const activitiesNU = useSelector<RootState, string[]>(
     (state) => state.activitiesNU
   );
@@ -21,7 +20,6 @@ export default function AllActivities() {
     (state) => state.positionAccuracy
   );
 
-  type AppDispatch = typeof store.dispatch;
   const dispatch: AppDispatch = useDispatch();
 
   const handleGetCurrentLocation = (position: any) => {
