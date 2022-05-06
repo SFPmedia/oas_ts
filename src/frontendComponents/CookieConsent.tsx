@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cookieConsentStatus } from "../actions";
 import { store } from "../index";
 
-export default function CookieConsent() {
+export default function CookieConsent(): JSX.Element {
   type RootState = ReturnType<typeof store.getState>;
   const cookieStatusWatcher = useSelector<RootState, boolean | null>(
     (state) => state.cookieConsentChoiceMade
@@ -25,7 +25,7 @@ export default function CookieConsent() {
     }
   };
 
-  const handleCookieConsentDisplay = () => {
+  const handleCookieConsentDisplay = (): boolean | null => {
     const cookieConsentCurrentStatus: string | null = localStorage.getItem(
       "CookieConsentStatus"
     );
