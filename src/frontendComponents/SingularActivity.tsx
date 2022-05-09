@@ -58,7 +58,7 @@ export default function SingularActivity(props: SATypes) {
                     )}
                     {props.distance ? (
                       <Typography variant="body2">
-                        Distance: <br /> {props.distance}
+                        Distance: <br /> {props.distance}km
                       </Typography>
                     ) : (
                       <Typography variant="body2" color="GrayText">
