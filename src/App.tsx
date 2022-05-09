@@ -11,10 +11,9 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
 import { fetchActivities, accuracySuccess } from "./actions";
 import { useDispatch } from "react-redux";
-import { store } from "./index";
+import { AppDispatch } from "./customTypes";
 
 function App() {
-  type AppDispatch = typeof store.dispatch;
   const dispatch: AppDispatch = useDispatch();
 
   const handleAccuracySuccess = (position: any) => {
