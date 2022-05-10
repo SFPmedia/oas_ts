@@ -288,8 +288,8 @@ export const getCurrentLocation = (position: any) => {
     });
 
     for (k = 0; k < latArr.length; k++) {
-      const lat1: number = parseFloat(activityArr[k].latitude);
-      const lon1: number = parseFloat(activityArr[k].longitude);
+      const lat1: number = activityArr[k].latitude;
+      const lon1: number = activityArr[k].longitude;
       const lat2: number = position.coords.latitude;
       const lon2: number = position.coords.longitude;
 
@@ -311,6 +311,7 @@ export const getCurrentLocation = (position: any) => {
         searchResultNU.push(getLocalStorageNU![k]);
       }
     }
+
     return dispatch({
       type: "SET_ACTIVITIESNU",
       payload: searchResultNU,
