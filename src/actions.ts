@@ -100,11 +100,13 @@ export const forceUpdateActivities = () => {
 // what the user is searching for
 export const filterActivityList = (searchInputProp: string) => {
   return async (dispatch: Dispatch) => {
-    const filterInputValue = (
+    const filterInputValue: string = (
       document.getElementById("filterInput") as HTMLInputElement
     ).value;
 
-    const getLocalStorage = JSON.parse(localStorage.getItem("activities")!);
+    const getLocalStorage: Array<any> = JSON.parse(
+      localStorage.getItem("activities")!
+    );
     let searchResult: string[] = [];
 
     const searchInput: string = searchInputProp;
@@ -256,11 +258,11 @@ export const searchSelectVisible = (visibilityStatus: boolean) => {
   };
 };
 
-export const accuracySuccess = (position: string | null) => {
+export const accuracySuccess = (position: string) => {
   return async (dispatch: Dispatch) => {
     return dispatch({
       type: "SET_POSITIONACCURACY",
-      payload: position,
+      payload: position!,
     });
   };
 };
@@ -277,7 +279,7 @@ export const getCurrentLocation = (position: any) => {
 
     let userInputToNumber: number = parseInt(userInput);
 
-    const getLocalStorageNU: string[] | null = JSON.parse(
+    const getLocalStorageNU: string[] = JSON.parse(
       localStorage.getItem("activities")!
     );
     const activityArr: Array<any> = getLocalStorageNU!;

@@ -7,8 +7,8 @@ import { cookieConsentStatus } from "../actions";
 import { RootState, AppDispatch } from "../customTypes";
 
 export default function CookieConsent(): JSX.Element {
-  const cookieStatusWatcher = useSelector<RootState, boolean | null>(
-    (state) => state.cookieConsentChoiceMade
+  const cookieStatusWatcher = useSelector<RootState, boolean>(
+    (state) => state.cookieConsentChoiceMade!
   );
   const dispatch: AppDispatch = useDispatch();
 
@@ -24,9 +24,9 @@ export default function CookieConsent(): JSX.Element {
   };
 
   const handleCookieConsentDisplay = (): boolean | null => {
-    const cookieConsentCurrentStatus: string | null = localStorage.getItem(
+    const cookieConsentCurrentStatus: string = localStorage.getItem(
       "CookieConsentStatus"
-    );
+    )!;
     if (cookieConsentCurrentStatus === "true") {
       return true;
     } else if (cookieStatusWatcher === true || cookieStatusWatcher === false) {
