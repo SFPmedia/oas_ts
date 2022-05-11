@@ -120,7 +120,7 @@ export default function SingularActivity(props: SATypes) {
                     id={"AGI" + props.id}
                   >
                     <Typography variant="h4">Practical Info</Typography>
-                    {props.open_hours ? (
+                    {props.open_hours !== "00:00:00" ? (
                       <Typography variant="body2">
                         Opening Hours: <br /> {props.open_hours}
                       </Typography>
@@ -130,7 +130,7 @@ export default function SingularActivity(props: SATypes) {
                         Not available
                       </Typography>
                     )}
-                    {props.closing_hours ? (
+                    {props.closing_hours !== "00:00:00" ? (
                       <Typography variant="body2">
                         Closing Hours: <br /> {props.closing_hours}
                       </Typography>
