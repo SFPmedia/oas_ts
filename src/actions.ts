@@ -154,7 +154,7 @@ export const filterActivityList = (searchInputProp: string) => {
           filterThisInput = activity.name.toLowerCase();
       }
 
-      var filteredInput: number = filterThisInput.indexOf(
+      let filteredInput: number = filterThisInput.indexOf(
         filterInputValue.toLowerCase()
       );
       if (filteredInput > -1) {
@@ -173,9 +173,9 @@ export const filterActivityList = (searchInputProp: string) => {
 // The searchSelect() function allows the user to choose which type of information the filter should search by.
 export const searchSelect = (Search: string) => {
   return async (dispatch: Dispatch) => {
-    var text: string;
-    var userSearchType: string;
-    var searchType: string = Search;
+    let text: string;
+    let userSearchType: string;
+    let searchType: string = Search;
     switch (searchType) {
       case "Name":
         text = " Name";
