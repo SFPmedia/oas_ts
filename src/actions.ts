@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { PositionType, SATypes, singularActivityArrType } from "./customTypes";
 
 // When the react component has mounted, the useEffect checks if data can already be found in the local storage and if said data is not older than 18 hours.
 // If data has been found and it is not older than 18 hours. Then that data will be inserted into the "activitiesNU" list. This data will then
@@ -114,51 +115,53 @@ export const filterActivityList = (searchInputProp: string) => {
     getLocalStorage.map((activity: any) => {
       let filterThisInput: string;
       const userSearchInput = searchInput;
+      const activitySearch: SATypes = activity;
+      const activityReturn: string = activity;
 
       switch (userSearchInput) {
         case "name":
-          filterThisInput = activity.name.toLowerCase();
+          filterThisInput = activitySearch.name.toLowerCase();
           break;
         case "type":
-          filterThisInput = activity.type.toLowerCase();
+          filterThisInput = activitySearch.type.toLowerCase();
           break;
         case "description":
-          filterThisInput = activity.description.toLowerCase();
+          filterThisInput = activitySearch.description.toLowerCase();
           break;
         case "city":
-          filterThisInput = activity.city.toLowerCase();
+          filterThisInput = activitySearch.city.toLowerCase();
           break;
         case "municipality":
-          filterThisInput = activity.municipality.toLowerCase();
+          filterThisInput = activitySearch.municipality.toLowerCase();
           break;
         case "county":
-          filterThisInput = activity.county.toLowerCase();
+          filterThisInput = activitySearch.county.toLowerCase();
           break;
         case "opening-hours":
-          filterThisInput = activity.open_hours.toLowerCase();
+          filterThisInput = activitySearch.open_hours.toLowerCase();
           break;
         case "closing-hours":
-          filterThisInput = activity.closing_hours.toLowerCase();
+          filterThisInput = activitySearch.closing_hours.toLowerCase();
           break;
         case "country":
-          filterThisInput = activity.country.toLowerCase();
+          filterThisInput = activitySearch.country.toLowerCase();
           break;
         case "subregion":
-          filterThisInput = activity.subregion.toLowerCase();
+          filterThisInput = activitySearch.subregion.toLowerCase();
           break;
         case "region":
-          filterThisInput = activity.region.toLowerCase();
+          filterThisInput = activitySearch.region.toLowerCase();
           break;
 
         default:
-          filterThisInput = activity.name.toLowerCase();
+          filterThisInput = activitySearch.name.toLowerCase();
       }
 
       let filteredInput: number = filterThisInput.indexOf(
         filterInputValue.toLowerCase()
       );
       if (filteredInput > -1) {
-        return searchResult.push(activity);
+        return searchResult.push(activityReturn);
       } else {
         return null;
       }
@@ -267,7 +270,7 @@ export const accuracySuccess = (position: string) => {
   };
 };
 
-export const getCurrentLocation = (position: any) => {
+export const getCurrentLocation = (position: PositionType) => {
   return async (dispatch: Dispatch) => {
     let searchResultNU: Array<any> = [];
     let latArr: number[] = [];
@@ -276,7 +279,6 @@ export const getCurrentLocation = (position: any) => {
     let userInput: string = (
       document.getElementById("filterInputNU") as HTMLInputElement
     ).value;
-
     let userInputToNumber: number = parseInt(userInput);
 
     const getLocalStorageNU: string[] = JSON.parse(
@@ -284,7 +286,7 @@ export const getCurrentLocation = (position: any) => {
     );
     const activityArr: Array<any> = getLocalStorageNU!;
 
-    activityArr.map((singularActivityArr: any) => {
+    activityArr.map((singularActivityArr: singularActivityArrType) => {
       latArr.push(singularActivityArr.latitude);
       return lonArr.push(singularActivityArr.longitude);
     });

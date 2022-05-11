@@ -11,12 +11,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
 import { fetchActivities, accuracySuccess } from "./actions";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "./customTypes";
+import { AppDispatch, PositionType } from "./customTypes";
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
 
-  const handleAccuracySuccess = (position: any) => {
+  const handleAccuracySuccess = (position: PositionType) => {
     const accuracyToKiloMeter: number = position.coords.accuracy / 1000;
     const accuracyToKiloMeterString: string = accuracyToKiloMeter
       .toString()

@@ -26,3 +26,12 @@ export interface SATypes {
   region: string;
   geolocation: string;
 }
+
+export interface PositionType {
+  coords: GeolocationCoordinates;
+}
+
+export interface singularActivityArrType {
+  latitude: number;
+  longitude: number;
+}
