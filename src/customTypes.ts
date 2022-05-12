@@ -25,13 +25,10 @@ export interface SATypes {
   subregion: string;
   region: string;
   geolocation: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface PositionType {
   coords: GeolocationCoordinates;
-}
-
-export interface singularActivityArrType {
-  latitude: number;
-  longitude: number;
 }

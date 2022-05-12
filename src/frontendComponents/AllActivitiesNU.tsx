@@ -51,7 +51,7 @@ export default function AllActivities() {
             km
           </Typography>
         </div>
-        {activitiesNU.map((activityNU: any) => [
+        {activitiesNU.map((activityNU: SATypes) => [
           <SingularActivity
             key={"SinActNU" + activityNU.id}
             id={activityNU.id}

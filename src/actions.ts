@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { PositionType, SATypes, singularActivityArrType } from "./customTypes";
+import { PositionType, SATypes } from "./customTypes";
 
 // When the react component has mounted, the useEffect checks if data can already be found in the local storage and if said data is not older than 18 hours.
 // If data has been found and it is not older than 18 hours. Then that data will be inserted into the "activitiesNU" list. This data will then
@@ -105,63 +105,61 @@ export const filterActivityList = (searchInputProp: string) => {
       document.getElementById("filterInput") as HTMLInputElement
     ).value;
 
-    const getLocalStorage: Array<any> = JSON.parse(
+    const getLocalStorage: SATypes[] = JSON.parse(
       localStorage.getItem("activities")!
     );
-    let searchResult: string[] = [];
+    let searchResult: SATypes[] = [];
 
     const searchInput: string = searchInputProp;
 
-    getLocalStorage.map((activity: any) => {
+    getLocalStorage.map((activity: SATypes) => {
       let filterThisInput: string;
-      const userSearchInput = searchInput;
-      const activitySearch: SATypes = activity;
-      const activityReturn: string = activity;
+      const userSearchInput: string = searchInput;
 
       switch (userSearchInput) {
         case "name":
-          filterThisInput = activitySearch.name.toLowerCase();
+          filterThisInput = activity.name.toLowerCase();
           break;
         case "type":
-          filterThisInput = activitySearch.type.toLowerCase();
+          filterThisInput = activity.type.toLowerCase();
           break;
         case "description":
-          filterThisInput = activitySearch.description.toLowerCase();
+          filterThisInput = activity.description.toLowerCase();
           break;
         case "city":
-          filterThisInput = activitySearch.city.toLowerCase();
+          filterThisInput = activity.city.toLowerCase();
           break;
         case "municipality":
-          filterThisInput = activitySearch.municipality.toLowerCase();
+          filterThisInput = activity.municipality.toLowerCase();
           break;
         case "county":
-          filterThisInput = activitySearch.county.toLowerCase();
+          filterThisInput = activity.county.toLowerCase();
           break;
         case "opening-hours":
-          filterThisInput = activitySearch.open_hours.toLowerCase();
+          filterThisInput = activity.open_hours.toLowerCase();
           break;
         case "closing-hours":
-          filterThisInput = activitySearch.closing_hours.toLowerCase();
+          filterThisInput = activity.closing_hours.toLowerCase();
           break;
         case "country":
-          filterThisInput = activitySearch.country.toLowerCase();
+          filterThisInput = activity.country.toLowerCase();
           break;
         case "subregion":
-          filterThisInput = activitySearch.subregion.toLowerCase();
+          filterThisInput = activity.subregion.toLowerCase();
           break;
         case "region":
-          filterThisInput = activitySearch.region.toLowerCase();
+          filterThisInput = activity.region.toLowerCase();
           break;
 
         default:
-          filterThisInput = activitySearch.name.toLowerCase();
+          filterThisInput = activity.name.toLowerCase();
       }
 
       let filteredInput: number = filterThisInput.indexOf(
         filterInputValue.toLowerCase()
       );
       if (filteredInput > -1) {
-        return searchResult.push(activityReturn);
+        return searchResult.push(activity);
       } else {
         return null;
       }
@@ -272,7 +270,7 @@ export const accuracySuccess = (position: string) => {
 
 export const getCurrentLocation = (position: PositionType) => {
   return async (dispatch: Dispatch) => {
-    let searchResultNU: Array<any> = [];
+    let searchResultNU: SATypes[] = [];
     let latArr: number[] = [];
     let lonArr: number[] = [];
     let k: number;
@@ -281,19 +279,19 @@ export const getCurrentLocation = (position: PositionType) => {
     ).value;
     let userInputToNumber: number = parseInt(userInput);
 
-    const getLocalStorageNU: string[] = JSON.parse(
+    const getLocalStorageNU: SATypes[] = JSON.parse(
       localStorage.getItem("activities")!
     );
-    const activityArr: Array<any> = getLocalStorageNU!;
+    const activityArr: SATypes[] = getLocalStorageNU!;
 
-    activityArr.map((singularActivityArr: singularActivityArrType) => {
-      latArr.push(singularActivityArr.latitude);
-      return lonArr.push(singularActivityArr.longitude);
+    activityArr.map((singularActivityArr: SATypes) => {
+      latArr.push(singularActivityArr.latitude!);
+      return lonArr.push(singularActivityArr.longitude!);
     });
 
     for (k = 0; k < latArr.length; k++) {
-      const lat1: number = activityArr[k].latitude;
-      const lon1: number = activityArr[k].longitude;
+      const lat1: number = activityArr[k].latitude!;
+      const lon1: number = activityArr[k].longitude!;
       const lat2: number = position.coords.latitude;
       const lon2: number = position.coords.longitude;
 
