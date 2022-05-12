@@ -6,7 +6,7 @@ export type RootState = ReturnType<typeof store.getState>;
 // Used in CookieConsent.tsx, AllActivities.tsx, AllActivitiesNU.tsx
 export type AppDispatch = typeof store.dispatch;
 
-// Used in SingularActivity.jsx
+// Used in SingularActivity.jsx, actions.ts
 export interface SATypes {
   id: number;
   name: string;

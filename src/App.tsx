@@ -13,7 +13,7 @@ import { fetchActivities, accuracySuccess } from "./actions";
 import { useDispatch } from "react-redux";
 import { AppDispatch, PositionType } from "./customTypes";
 
-function App() {
+function App(): React.ReactElement {
   const dispatch: AppDispatch = useDispatch();
 
   const handleAccuracySuccess = (position: PositionType) => {

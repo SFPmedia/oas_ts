@@ -1,6 +1,8 @@
+import { SATypes } from "./customTypes";
+
 const initialState = {
-  activities: [""],
-  activitiesNU: [""],
+  activities: [] as SATypes[],
+  activitiesNU: [] as SATypes[],
   userSearch: "  Name",
   searchInput: "name",
   searchSelectVisibleStatus: false,

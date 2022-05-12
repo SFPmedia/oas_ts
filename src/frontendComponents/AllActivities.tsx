@@ -13,10 +13,10 @@ import {
   searchSelect,
   searchSelectVisible,
 } from "../actions";
-import { RootState, AppDispatch } from "../customTypes";
+import { RootState, AppDispatch, SATypes } from "../customTypes";
 
-export default function AllActivities() {
-  const activities = useSelector<RootState, string[]>(
+export default function AllActivities(): React.ReactElement {
+  const activities = useSelector<RootState, SATypes[]>(
     (state) => state.activities
   );
   const userSearch = useSelector<RootState, string>(
@@ -194,7 +194,7 @@ export default function AllActivities() {
           />
         </div>
 
-        {activities.map((activity: any) => [
+        {activities.map((activity: SATypes) => [
           <SingularActivity
             key={"SinAct" + activity.id}
             id={activity.id}
