@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentLocation } from "../actions";
 import { RootState, AppDispatch, PositionType, SATypes } from "../customTypes";
 
-export default function AllActivities() {
+export default function AllActivities(): JSX.Element {
   const activitiesNU = useSelector<RootState, SATypes[]>(
     (state) => state.activitiesNU
   );
