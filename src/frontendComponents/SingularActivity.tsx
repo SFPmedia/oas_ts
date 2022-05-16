@@ -14,7 +14,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/ActivityListTheme";
 import { SATypes } from "../customTypes";
 
-export default function SingularActivity(props: SATypes) {
+export default function SingularActivity(props: SATypes): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
       <Card key={props.id} id={"AL" + props.id}>

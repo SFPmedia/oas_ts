@@ -1,6 +1,6 @@
-import { SATypes } from "./customTypes";
+import { initialStateTypes, SATypes } from "./customTypes";
 
-const initialState = {
+const initialState: initialStateTypes = {
   activities: [] as SATypes[],
   activitiesNU: [] as SATypes[],
   userSearch: "  Name",

@@ -32,3 +32,13 @@ export interface SATypes {
 export interface PositionType {
   coords: GeolocationCoordinates;
 }
+
+export interface initialStateTypes {
+  activities: SATypes[];
+  activitiesNU: SATypes[];
+  userSearch: string;
+  searchInput: string;
+  searchSelectVisibleStatus: boolean;
+  positionAccuracy: number | null;
+  cookieConsentChoiceMade: null;
+}

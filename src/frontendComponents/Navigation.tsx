@@ -3,7 +3,7 @@ import { Box, AppBar, Toolbar, Link } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/NavTheme";
 
-export default function Navigation() {
+export default function Navigation(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
       <Box>

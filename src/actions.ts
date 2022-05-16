@@ -6,7 +6,7 @@ import { PositionType, SATypes } from "./customTypes";
 // be used to generate the list.
 // If the 2 conditions are not true. It will retrieve a new set of data from the database on the server, via a webAPI and insert that data into "activitiesNU" instead.
 export const fetchActivities = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch): Promise<void> => {
     let localStorageExpirationTimeToNumber: number = JSON.parse(
       localStorage.getItem("lsExpirationTime")!
     );
@@ -63,7 +63,7 @@ export const fetchActivities = () => {
 
 // forceUpdateActivities() gives the user a way to clear the local storage, get the latest data from the server and then insert that into the local storage and "activities" + "activitiesNU" states.
 export const forceUpdateActivities = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch): Promise<void> => {
     localStorage.removeItem("activities");
     localStorage.removeItem("lsExpirationTime");
 
@@ -100,7 +100,7 @@ export const forceUpdateActivities = () => {
 // Whenever a person types in the search bar, this function filters through the entire list and only returns a list that corresponds with
 // what the user is searching for
 export const filterActivityList = (searchInputProp: string) => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch): Promise<void> => {
     const filterInputValue: string = (
       document.getElementById("filterInput") as HTMLInputElement
     ).value;
@@ -173,7 +173,7 @@ export const filterActivityList = (searchInputProp: string) => {
 
 // The searchSelect() function allows the user to choose which type of information the filter should search by.
 export const searchSelect = (Search: string) => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch): Promise<void> => {
     let text: string;
     let userSearchType: string;
     let searchType: string = Search;
@@ -244,7 +244,12 @@ export const searchSelect = (Search: string) => {
 
 // Determines whether or not the list is shown or not, when the button "SEARCH BY" is clicked.
 export const searchSelectVisible = (visibilityStatus: boolean) => {
-  return async (dispatch: Dispatch) => {
+  return async (
+    dispatch: Dispatch
+  ): Promise<{
+    type: string;
+    payload: boolean;
+  }> => {
     if (visibilityStatus === false) {
       return dispatch({
         type: "SET_SEARCHSELECTVISIBLESTATUS",
@@ -260,7 +265,12 @@ export const searchSelectVisible = (visibilityStatus: boolean) => {
 };
 
 export const accuracySuccess = (position: string) => {
-  return async (dispatch: Dispatch) => {
+  return async (
+    dispatch: Dispatch
+  ): Promise<{
+    type: string;
+    payload: string;
+  }> => {
     return dispatch({
       type: "SET_POSITIONACCURACY",
       payload: position!,
@@ -269,7 +279,12 @@ export const accuracySuccess = (position: string) => {
 };
 
 export const getCurrentLocation = (position: PositionType) => {
-  return async (dispatch: Dispatch) => {
+  return async (
+    dispatch: Dispatch
+  ): Promise<{
+    type: string;
+    payload: SATypes[];
+  }> => {
     let searchResultNU: SATypes[] = [];
     let latArr: number[] = [];
     let lonArr: number[] = [];
@@ -323,7 +338,18 @@ export const getCurrentLocation = (position: PositionType) => {
 
 // Determines whether or not the list is shown or not, when the button "SEARCH BY" is clicked.
 export const cookieConsentStatus = (status: boolean | null) => {
-  return async (dispatch: Dispatch) => {
+  return async (
+    dispatch: Dispatch
+  ): Promise<
+    | {
+        type: string;
+        payload: boolean;
+      }
+    | {
+        type: string;
+        payload: null;
+      }
+  > => {
     if (status === false) {
       return dispatch({
         type: "SET_COOKIECONSENTSTATUS",

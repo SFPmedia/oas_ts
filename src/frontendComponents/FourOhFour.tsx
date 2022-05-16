@@ -3,7 +3,7 @@ import { Typography, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/FourOhFourTheme";
 
-const FourOhFour = () => {
+const FourOhFour = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <Container>
