@@ -6,7 +6,7 @@ export type RootState = ReturnType<typeof store.getState>;
 // Used in CookieConsent.tsx, AllActivities.tsx, AllActivitiesNU.tsx
 export type AppDispatch = typeof store.dispatch;
 
-// Used in SingularActivity.jsx, actions.ts
+// Used in SingularActivity.tsx, actions.ts, AllActivities.tsx,  AllActivitiesNU.tsx, reducer.ts
 export interface SATypes {
   id: number;
   name: string;
@@ -29,10 +29,12 @@ export interface SATypes {
   longitude?: number;
 }
 
+// Used in AllActivitiesNU.tsx, actions.ts, App.tsx
 export interface PositionType {
   coords: GeolocationCoordinates;
 }
 
+// Used in reducer.ts
 export interface initialStateTypes {
   activities: SATypes[];
   activitiesNU: SATypes[];
