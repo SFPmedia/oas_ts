@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { PositionType, SATypes } from "./customTypes";
+import { PositionType, SATypes } from "../customTypes";
 
 // When the react component has mounted, the useEffect checks if data can already be found in the local storage and if said data is not older than 18 hours.
 // If data has been found and it is not older than 18 hours. Then that data will be inserted into the "activitiesNU" list. This data will then

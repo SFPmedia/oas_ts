@@ -12,21 +12,21 @@ import {
   filterActivityList,
   searchSelect,
   searchSelectVisible,
-} from "../actions";
+} from "../redux/actions";
 import { RootState, AppDispatch, SATypes } from "../customTypes";
 
 export default function AllActivities(): React.ReactElement {
   const activities = useSelector<RootState, SATypes[]>(
-    (state) => state.activities
+    (state) => state.activitiesReducer.activities
   );
   const userSearch = useSelector<RootState, string>(
-    (state) => state.userSearch
+    (state) => state.activitiesReducer.userSearch
   );
   const searchInput = useSelector<RootState, string>(
-    (state) => state.searchInput
+    (state) => state.activitiesReducer.searchInput
   );
   const searchSelectVisibleStatus = useSelector<RootState, boolean>(
-    (state) => state.searchSelectVisibleStatus
+    (state) => state.activitiesReducer.searchSelectVisibleStatus
   );
 
   const dispatch: AppDispatch = useDispatch();

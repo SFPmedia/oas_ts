@@ -2,14 +2,10 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reducer from "./reducer";
-import thunk from "redux-thunk";
+import store from "./redux/store";
 
 const container: HTMLElement = document.getElementById("root")!;
 const root = createRoot(container);
-
-export const store = createStore(reducer, applyMiddleware(thunk));
 
 root.render(
   <React.StrictMode>

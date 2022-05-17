@@ -1,6 +1,6 @@
-import { initialStateTypes, SATypes } from "./customTypes";
+import { initialActivitiesStateTypes, SATypes } from "../customTypes";
 
-const initialState: initialStateTypes = {
+const initialActivitiesState: initialActivitiesStateTypes = {
   activities: [] as SATypes[],
   activitiesNU: [] as SATypes[],
   userSearch: "  Name",
@@ -10,7 +10,7 @@ const initialState: initialStateTypes = {
   cookieConsentChoiceMade: null,
 };
 
-const reducer = (state = initialState, action: any) => {
+const activitiesReducer = (state = initialActivitiesState, action: any) => {
   switch (action.type) {
     case "SET_COOKIECONSENTSTATUS":
       return {
@@ -52,4 +52,4 @@ const reducer = (state = initialState, action: any) => {
   }
 };
 
-export default reducer;
+export default activitiesReducer;

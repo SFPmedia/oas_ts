@@ -1,4 +1,4 @@
-import { store } from "./index";
+import store from "./redux/store";
 
 // Used in CookieConsent.tsx, AllActivities.tsx, AllActivitiesNU.tsx
 export type RootState = ReturnType<typeof store.getState>;
@@ -35,7 +35,7 @@ export interface PositionType {
 }
 
 // Used in reducer.ts
-export interface initialStateTypes {
+export interface initialActivitiesStateTypes {
   activities: SATypes[];
   activitiesNU: SATypes[];
   userSearch: string;

@@ -3,12 +3,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/CookieConsentTheme";
 import { Container, Button, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { cookieConsentStatus } from "../actions";
+import { cookieConsentStatus } from "../redux/actions";
 import { RootState, AppDispatch } from "../customTypes";
 
 export default function CookieConsent(): JSX.Element {
   const cookieStatusWatcher = useSelector<RootState, boolean>(
-    (state) => state.cookieConsentChoiceMade!
+    (state) => state.activitiesReducer.cookieConsentChoiceMade!
   );
   const dispatch: AppDispatch = useDispatch();
 

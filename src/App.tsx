@@ -9,7 +9,7 @@ import CookieConsent from "./frontendComponents/CookieConsent";
 import { CssBaseline, Grid, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
-import { fetchActivities, accuracySuccess } from "./actions";
+import { fetchActivities, accuracySuccess } from "./redux/actions";
 import { useDispatch } from "react-redux";
 import { AppDispatch, PositionType } from "./customTypes";
 

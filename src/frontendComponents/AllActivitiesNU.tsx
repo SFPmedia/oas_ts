@@ -9,15 +9,15 @@ import Container from "@mui/material/Container";
 import SingularActivity from "./SingularActivity";
 import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentLocation } from "../actions";
+import { getCurrentLocation } from "../redux/actions";
 import { RootState, AppDispatch, PositionType, SATypes } from "../customTypes";
 
-export default function AllActivities(): JSX.Element {
+export default function AllActivities(): React.ReactElement {
   const activitiesNU = useSelector<RootState, SATypes[]>(
-    (state) => state.activitiesNU
+    (state) => state.activitiesReducer.activitiesNU
   );
   const positionAccuracy = useSelector<RootState, number | null>(
-    (state) => state.positionAccuracy
+    (state) => state.activitiesReducer.positionAccuracy
   );
 
   const dispatch: AppDispatch = useDispatch();
