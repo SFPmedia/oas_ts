@@ -9,24 +9,30 @@ import CookieConsent from "./frontendComponents/CookieConsent";
 import { CssBaseline, Grid, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
-import { fetchActivities, accuracySuccess } from "./redux/actions";
+import { accuracySuccess, accuracySuccessResult } from "./redux/actions";
 import { useDispatch } from "react-redux";
-import { AppDispatch, PositionType } from "./customTypes";
+import { AppDispatch } from "./customTypes";
+import { getActivitiesData, getPositionAccuracy } from "./redux/reducer";
 
 function App(): React.ReactElement {
   const dispatch: AppDispatch = useDispatch();
 
-  const handleAccuracySuccess = (position: PositionType) => {
-    const accuracyToKiloMeter: number = position.coords.accuracy / 1000;
-    const accuracyToKiloMeterString: string = accuracyToKiloMeter
-      .toString()
-      .substring(0, 4);
-    return dispatch(accuracySuccess(accuracyToKiloMeterString));
-  };
-
   useEffect(() => {
-    dispatch(fetchActivities());
-    navigator.geolocation.getCurrentPosition(handleAccuracySuccess);
+    navigator.geolocation.getCurrentPosition(accuracySuccess);
+    dispatch(getActivitiesData());
+    function accuracyUpdater(): any {
+      if (!accuracySuccessResult) {
+        console.log("Trying to catch the position accuracy again");
+      } else {
+        yieldAccuracy();
+      }
+    }
+
+    function yieldAccuracy(): any {
+      dispatch(getPositionAccuracy());
+    }
+
+    setTimeout(accuracyUpdater, 1000);
   }, []);
 
   return (

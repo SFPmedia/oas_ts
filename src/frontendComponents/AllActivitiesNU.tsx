@@ -11,6 +11,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentLocation } from "../redux/actions";
 import { RootState, AppDispatch, PositionType, SATypes } from "../customTypes";
+import { getActivitiesData, getFilterActivityListNU } from "../redux/reducer";
 
 export default function AllActivities(): React.ReactElement {
   const activitiesNU = useSelector<RootState, SATypes[]>(
@@ -23,7 +24,8 @@ export default function AllActivities(): React.ReactElement {
   const dispatch: AppDispatch = useDispatch();
 
   const handleGetCurrentLocation = (position: PositionType) => {
-    return dispatch(getCurrentLocation(position));
+    getCurrentLocation(position);
+    return dispatch(getFilterActivityListNU());
   };
 
   return (
@@ -51,28 +53,38 @@ export default function AllActivities(): React.ReactElement {
             km
           </Typography>
         </div>
-        {activitiesNU.map((activityNU: SATypes) => [
-          <SingularActivity
-            key={"SinActNU" + activityNU.id}
-            id={activityNU.id}
-            name={activityNU.name}
-            type={activityNU.type}
-            description={activityNU.description}
-            distance={activityNU.distance}
-            price={activityNU.price}
-            city={activityNU.city}
-            municipality={activityNU.municipality}
-            county={activityNU.county}
-            open_hours={activityNU.open_hours}
-            closing_hours={activityNU.closing_hours}
-            website_link={activityNU.website_link}
-            phone={activityNU.phone}
-            country={activityNU.country}
-            subregion={activityNU.subregion}
-            region={activityNU.region}
-            geolocation={activityNU.geolocation}
-          />,
-        ])}
+        {activitiesNU ? (
+          activitiesNU.map((activityNU: SATypes) => [
+            <SingularActivity
+              key={"SinActNU" + activityNU.id}
+              id={activityNU.id}
+              name={activityNU.name}
+              type={activityNU.type}
+              description={activityNU.description}
+              distance={activityNU.distance}
+              price={activityNU.price}
+              city={activityNU.city}
+              municipality={activityNU.municipality}
+              county={activityNU.county}
+              open_hours={activityNU.open_hours}
+              closing_hours={activityNU.closing_hours}
+              website_link={activityNU.website_link}
+              phone={activityNU.phone}
+              country={activityNU.country}
+              subregion={activityNU.subregion}
+              region={activityNU.region}
+              geolocation={activityNU.geolocation}
+            />,
+          ])
+        ) : (
+          <Typography
+            variant="body2"
+            color="GrayText"
+            onChange={dispatch(getActivitiesData)}
+          >
+            Loading...
+          </Typography>
+        )}
       </Container>
     </ThemeProvider>
   );

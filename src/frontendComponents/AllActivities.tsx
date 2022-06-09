@@ -7,13 +7,18 @@ import theme from "../componentStyles/ActivityListTheme";
 import { Container, Button, Typography, TextField } from "@mui/material";
 import SingularActivity from "./SingularActivity";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  forceUpdateActivities,
-  filterActivityList,
-  searchSelect,
-  searchSelectVisible,
-} from "../redux/actions";
+import { filterActivityList } from "../redux/actions";
 import { RootState, AppDispatch, SATypes } from "../customTypes";
+import {
+  getFilterActivityList,
+  getForceUpdateActivitiesData,
+  getSearchInput,
+  getSearchVisibilityStatus,
+  getUserSearch,
+} from "../redux/reducer";
+
+export let example = false;
+export let userSearchFilter = "Name";
 
 export default function AllActivities(): React.ReactElement {
   const activities = useSelector<RootState, SATypes[]>(
@@ -32,18 +37,22 @@ export default function AllActivities(): React.ReactElement {
   const dispatch: AppDispatch = useDispatch();
 
   const handleSearchSelectVisible = () => {
-    dispatch(searchSelectVisible(searchSelectVisibleStatus));
+    dispatch(getSearchVisibilityStatus());
   };
 
   const handleSearchSelect = (Search: string) => {
-    dispatch(searchSelect(Search));
+    userSearchFilter = Search;
+    dispatch(getUserSearch());
+    dispatch(getSearchInput());
+    dispatch(getSearchVisibilityStatus());
   };
   const handleForceUpdate = () => {
-    dispatch(forceUpdateActivities());
+    dispatch(getForceUpdateActivitiesData());
   };
 
   const handleFilterActivityList = () => {
-    dispatch(filterActivityList(searchInput));
+    filterActivityList(searchInput);
+    dispatch(getFilterActivityList());
   };
 
   // searchSelectColor() highlights the color of the selected search criteria.
@@ -194,28 +203,34 @@ export default function AllActivities(): React.ReactElement {
           />
         </div>
 
-        {activities.map((activity: SATypes) => [
-          <SingularActivity
-            key={"SinAct" + activity.id}
-            id={activity.id}
-            name={activity.name}
-            type={activity.type}
-            description={activity.description}
-            distance={activity.distance}
-            price={activity.price}
-            city={activity.city}
-            municipality={activity.municipality}
-            county={activity.county}
-            open_hours={activity.open_hours}
-            closing_hours={activity.closing_hours}
-            website_link={activity.website_link}
-            phone={activity.phone}
-            country={activity.country}
-            subregion={activity.subregion}
-            region={activity.region}
-            geolocation={activity.geolocation}
-          />,
-        ])}
+        {activities ? (
+          activities.map((activity: SATypes) => [
+            <SingularActivity
+              key={"SinAct" + activity.id}
+              id={activity.id}
+              name={activity.name}
+              type={activity.type}
+              description={activity.description}
+              distance={activity.distance}
+              price={activity.price}
+              city={activity.city}
+              municipality={activity.municipality}
+              county={activity.county}
+              open_hours={activity.open_hours}
+              closing_hours={activity.closing_hours}
+              website_link={activity.website_link}
+              phone={activity.phone}
+              country={activity.country}
+              subregion={activity.subregion}
+              region={activity.region}
+              geolocation={activity.geolocation}
+            />,
+          ])
+        ) : (
+          <Typography variant="body2" color="GrayText">
+            Loading...
+          </Typography>
+        )}
       </Container>
     </ThemeProvider>
   );

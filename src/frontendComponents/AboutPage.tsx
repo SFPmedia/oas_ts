@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, Grid } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/AboutPageTheme";

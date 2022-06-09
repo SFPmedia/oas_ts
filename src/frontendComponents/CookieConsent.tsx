@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/CookieConsentTheme";
 import { Container, Button, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { cookieConsentStatus } from "../redux/actions";
 import { RootState, AppDispatch } from "../customTypes";
+import { getCookieConsentStatus } from "../redux/reducer";
 
 export default function CookieConsent(): JSX.Element {
   const cookieStatusWatcher = useSelector<RootState, boolean>(
@@ -12,15 +12,15 @@ export default function CookieConsent(): JSX.Element {
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const handleCookieConsent = (status: boolean) => {
-    dispatch(cookieConsentStatus(status));
-    if (status === true) {
+  const handleCookieConsent = (status: string) => {
+    if (status === "true") {
       localStorage.setItem("CookieConsentStatus", "true");
     } else {
       localStorage.clear();
       sessionStorage.clear();
       window.history.go(-1);
     }
+    dispatch(getCookieConsentStatus());
   };
 
   const handleCookieConsentDisplay = (): boolean | null => {
@@ -57,7 +57,7 @@ export default function CookieConsent(): JSX.Element {
           <Container className="consentButtons">
             <Button
               variant="contained"
-              onClick={() => handleCookieConsent(false)}
+              onClick={() => handleCookieConsent("false")}
             >
               I DO NOT CONSENT
               <br />
@@ -65,7 +65,7 @@ export default function CookieConsent(): JSX.Element {
             </Button>
             <Button
               variant="contained"
-              onClick={() => handleCookieConsent(true)}
+              onClick={() => handleCookieConsent("true")}
             >
               I CONSENT
               <br /> I WILL STAY
