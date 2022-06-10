@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/AboutPageTheme";
 import { lightGreen } from "@mui/material/colors";
 
-export default function AboutPage(): JSX.Element {
+export default function AboutPage(): React.ReactElement {
   return (
     <ThemeProvider theme={theme}>
       <Grid container rowSpacing={20} justifyContent="center">

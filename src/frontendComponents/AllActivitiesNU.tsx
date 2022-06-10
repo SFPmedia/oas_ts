@@ -11,7 +11,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentLocation } from "../redux/actions";
 import { RootState, AppDispatch, PositionType, SATypes } from "../customTypes";
-import { getActivitiesData, getFilterActivityListNU } from "../redux/reducer";
+import { getFilterActivityListNU } from "../redux/actionTypes";
 
 export default function AllActivities(): React.ReactElement {
   const activitiesNU = useSelector<RootState, SATypes[]>(
@@ -53,7 +53,7 @@ export default function AllActivities(): React.ReactElement {
             km
           </Typography>
         </div>
-        {activitiesNU ? (
+        {activitiesNU.length > 0 ? (
           activitiesNU.map((activityNU: SATypes) => [
             <SingularActivity
               key={"SinActNU" + activityNU.id}
@@ -77,11 +77,7 @@ export default function AllActivities(): React.ReactElement {
             />,
           ])
         ) : (
-          <Typography
-            variant="body2"
-            color="GrayText"
-            onChange={dispatch(getActivitiesData)}
-          >
+          <Typography variant="body2" color="GrayText">
             Loading...
           </Typography>
         )}

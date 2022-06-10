@@ -10,30 +10,46 @@ import { CssBaseline, Grid, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
 import { accuracySuccess, accuracySuccessResult } from "./redux/actions";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "./customTypes";
-import { getActivitiesData, getPositionAccuracy } from "./redux/reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, SATypes } from "./customTypes";
+import { getActivitiesData, getPositionAccuracy } from "./redux/actionTypes";
 
 function App(): React.ReactElement {
   const dispatch: AppDispatch = useDispatch();
+  const activities = useSelector<RootState, SATypes[]>(
+    (state) => state.activitiesReducer.activities
+  );
+  const positionAccuracy = useSelector<RootState, number | null>(
+    (state) => state.activitiesReducer.positionAccuracy
+  );
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(accuracySuccess);
-    dispatch(getActivitiesData());
-    function accuracyUpdater(): any {
-      if (!accuracySuccessResult) {
-        console.log("Trying to catch the position accuracy again");
-      } else {
-        yieldAccuracy();
+    if (activities.length < 1) {
+      dispatch(getActivitiesData());
+    } else {
+      console.log("The activities are ready");
+    }
+
+    if (!positionAccuracy) {
+      navigator.geolocation.getCurrentPosition(accuracySuccess);
+
+      function accuracyUpdater(): any {
+        if (!accuracySuccessResult) {
+          console.log("Trying to catch the position accuracy again");
+        } else {
+          yieldAccuracy();
+        }
       }
-    }
 
-    function yieldAccuracy(): any {
-      dispatch(getPositionAccuracy());
-    }
+      function yieldAccuracy(): any {
+        dispatch(getPositionAccuracy());
+      }
 
-    setTimeout(accuracyUpdater, 1000);
-  }, []);
+      setTimeout(accuracyUpdater, 500);
+    } else {
+      console.log("Position accuracy is ready");
+    }
+  });
 
   return (
     <div className="App">

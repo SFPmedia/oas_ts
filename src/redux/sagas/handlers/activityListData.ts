@@ -20,7 +20,7 @@ import {
   setSearchVisibilityStatus,
   setUserSearch,
   setSearchInput,
-} from "../../reducer";
+} from "../../actionTypes";
 const put: any = Effects.put;
 const call: any = Effects.call;
 

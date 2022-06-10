@@ -15,7 +15,7 @@ import {
   getSearchInput,
   getSearchVisibilityStatus,
   getUserSearch,
-} from "../redux/reducer";
+} from "../redux/actionTypes";
 
 export let example = false;
 export let userSearchFilter = "Name";
@@ -203,7 +203,7 @@ export default function AllActivities(): React.ReactElement {
           />
         </div>
 
-        {activities ? (
+        {activities.length > 0 ? (
           activities.map((activity: SATypes) => [
             <SingularActivity
               key={"SinAct" + activity.id}
