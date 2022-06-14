@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../customTypes";
 import { getCookieConsentStatus } from "../redux/actionTypes";
 
-export default function CookieConsent(): JSX.Element {
-  const cookieStatusWatcher = useSelector<RootState, boolean>(
+export default function CookieConsent(): React.ReactElement {
+  const cookieStatusWatcher = useSelector<RootState, Boolean>(
     (state) => state.activitiesReducer.cookieConsentChoiceMade!
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const handleCookieConsent = (status: string) => {
+  const handleCookieConsent = (status: String) => {
     if (status === "true") {
       localStorage.setItem("CookieConsentStatus", "true");
     } else {
@@ -23,8 +23,8 @@ export default function CookieConsent(): JSX.Element {
     dispatch(getCookieConsentStatus());
   };
 
-  const handleCookieConsentDisplay = (): boolean | null => {
-    const cookieConsentCurrentStatus: string = localStorage.getItem(
+  const handleCookieConsentDisplay = (): Boolean | null => {
+    const cookieConsentCurrentStatus: String = localStorage.getItem(
       "CookieConsentStatus"
     )!;
     if (cookieConsentCurrentStatus === "true") {

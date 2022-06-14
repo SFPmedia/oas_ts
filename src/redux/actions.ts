@@ -4,7 +4,7 @@ import { PositionType, SATypes } from "../customTypes";
 // If data has been found and it is not older than 18 hours. Then that data will be inserted into the "activitiesNU" list. This data will then
 // be used to generate the list.
 // If the 2 conditions are not true. It will retrieve a new set of data from the database on the server, via a webAPI and insert that data into "activitiesNU" instead.
-export const fetchActivities = async () => {
+export const fetchActivities = async (): Promise<string[] | undefined> => {
   let localStorageExpirationTimeToNumber: number = JSON.parse(
     localStorage.getItem("lsExpirationTime")!
   );
@@ -12,15 +12,15 @@ export const fetchActivities = async () => {
     localStorage.getItem("activities") &&
     new Date().getTime() <= localStorageExpirationTimeToNumber
   ) {
-    const getLocalStorage: void = JSON.parse(
+    const getLocalStorage: string[] = JSON.parse(
       localStorage.getItem("activities")!
     );
-    const activities = getLocalStorage;
+    const activities: string[] = getLocalStorage;
     console.log("LocalStorage activities have been found. Using those.");
     return activities;
   } else {
     await fetch("https://sfpmedia.dk/db_api_oas/readActivities.php")
-      .then((response) => {
+      .then((response: Response) => {
         return response.json();
       })
       .then((data) => {
@@ -29,10 +29,10 @@ export const fetchActivities = async () => {
           "lsExpirationTime",
           JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
         );
-        const getLocalStorage: string = JSON.parse(
+        const getLocalStorage: Object[] = JSON.parse(
           localStorage.getItem("activities")!
         );
-        const activities = getLocalStorage;
+        const activities: Object[] = getLocalStorage;
         console.log(
           "LocalStorage activities were not found. Getting and using new ones."
         );
@@ -42,9 +42,9 @@ export const fetchActivities = async () => {
 };
 
 // forceUpdateActivities() gives the user a way to clear the local storage, get the latest data from the server and then insert that into the local storage and "activities" + "activitiesNU" states.
-export const forceUpdateActivities = async () => {
+export const forceUpdateActivities = async (): Promise<void> => {
   await fetch("https://sfpmedia.dk/db_api_oas/readActivities.php")
-    .then((response) => {
+    .then((response: Response) => {
       return response.json();
     })
     .then((data) => {
@@ -53,10 +53,10 @@ export const forceUpdateActivities = async () => {
         "lsExpirationTime",
         JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
       );
-      const getLocalStorage: object = JSON.parse(
+      const getLocalStorage: Object[] = JSON.parse(
         localStorage.getItem("activities")!
       );
-      const activities = getLocalStorage;
+      const activities: Object[] = getLocalStorage;
       console.log("Forced update of localstorage data and react state.");
       alert(
         "Forced update successful. The list has the newest data straight from the database."
@@ -70,8 +70,8 @@ export let filteredActivityList: any;
 
 // Whenever a person types in the search bar, this function filters through the entire list and only returns a list that corresponds with
 // what the user is searching for
-export const filterActivityList = (searchInputProp: string) => {
-  const filterInputValue: string = (
+export const filterActivityList = (searchInputProp: String): SATypes[] => {
+  const filterInputValue: String = (
     document.getElementById("filterInput") as HTMLInputElement
   ).value;
 
@@ -80,11 +80,11 @@ export const filterActivityList = (searchInputProp: string) => {
   );
   let searchResult: SATypes[] = [];
 
-  const searchInput: string = searchInputProp;
+  const searchInput: String = searchInputProp;
 
   getLocalStorage.map((activity: SATypes) => {
-    let filterThisInput: string;
-    const userSearchInput: string = searchInput;
+    let filterThisInput: String;
+    const userSearchInput: String = searchInput;
 
     switch (userSearchInput) {
       case "name":
@@ -138,13 +138,13 @@ export const filterActivityList = (searchInputProp: string) => {
   return (filteredActivityList = searchResult);
 };
 
-export let text: string;
-export let userSearchType: string;
+export let text: String;
+export let userSearchType: String;
 
 // The searchSelect() function allows the user to choose which type of information the filter should search by.
-export const searchSelect = (Search: string) => {
+export const searchSelect = (Search: String) => {
   console.log("Test 1");
-  let searchType: string = Search;
+  let searchType: String = Search;
   console.log("Search = " + searchType);
   console.log("Launch searchSelect action");
   switch (searchType) {
@@ -200,22 +200,24 @@ export const searchSelect = (Search: string) => {
   console.log("End of searchSelect action");
 };
 
-export let example = false;
+export let searchSelectVisibilityStatus: Boolean = false;
 
 // Determines whether or not the list is shown or not, when the button "SEARCH BY" is clicked.
-export const searchSelectVisible = async () => {
-  if (example === false) {
-    example = true;
+export const searchSelectVisible = async (): Promise<Boolean> => {
+  if (searchSelectVisibilityStatus === false) {
+    searchSelectVisibilityStatus = true;
     return true;
   } else {
-    example = false;
+    searchSelectVisibilityStatus = false;
     return false;
   }
 };
 
 export let accuracySuccessResult: string;
 
-export const accuracySuccess = async (position: PositionType) => {
+export const accuracySuccess = async (
+  position: PositionType
+): Promise<string> => {
   const accuracyToKiloMeter: number = position.coords.accuracy / 1000;
   accuracySuccessResult = accuracyToKiloMeter.toString().substring(0, 4);
   return accuracySuccessResult;
@@ -223,7 +225,7 @@ export const accuracySuccess = async (position: PositionType) => {
 
 export let filteredActivityListNU: any;
 
-export const getCurrentLocation = (position: PositionType) => {
+export const getCurrentLocation = (position: PositionType): SATypes[] => {
   let searchResultNU: SATypes[] = [];
   let latArr: number[] = [];
   let lonArr: number[] = [];
@@ -270,8 +272,10 @@ export const getCurrentLocation = (position: PositionType) => {
   return (filteredActivityListNU = searchResultNU);
 };
 
-export const cookieConsentStatus = () => {
-  const lsConsentStatus = localStorage.getItem("CookieConsentStatus");
+export const cookieConsentStatus = (): string | null => {
+  const lsConsentStatus: String | null = localStorage.getItem(
+    "CookieConsentStatus"
+  );
   if (lsConsentStatus === "false") {
     return "false";
   } else if (lsConsentStatus === "true") {

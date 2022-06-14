@@ -24,9 +24,9 @@ import {
 const put: any = Effects.put;
 const call: any = Effects.call;
 
-export function* handleGetActivityListData(): any {
+export function* handleGetActivityListData(): Generator<any, void, string[]> {
   try {
-    let response = yield call(fetchActivities);
+    let response: string[] = yield call(fetchActivities);
     let attemptNumber: number = 0;
 
     while (!response && attemptNumber <= 5) {
@@ -43,7 +43,7 @@ export function* handleGetActivityListData(): any {
   }
 }
 
-export function* handleGetPositionAccuracy(): any {
+export function* handleGetPositionAccuracy(): Generator<any, void, unknown> {
   try {
     yield put(setPositionAccuracy(accuracySuccessResult));
   } catch (error) {
@@ -51,12 +51,20 @@ export function* handleGetPositionAccuracy(): any {
   }
 }
 
-export function* handleCookieConsentStatus(): any {
+export function* handleCookieConsentStatus(): Generator<
+  any,
+  void,
+  String | null
+> {
   yield put(setCookieConsentStatus(yield call(cookieConsentStatus)));
 }
 
-export function* handleForceUpdateActivitiesData(): any {
-  let response = yield call(forceUpdateActivities);
+export function* handleForceUpdateActivitiesData(): Generator<
+  any,
+  void,
+  string[]
+> {
+  let response: string[] = yield call(forceUpdateActivities);
   let attemptNumber: number = 0;
 
   while (!response && attemptNumber <= 5) {
@@ -70,23 +78,23 @@ export function* handleForceUpdateActivitiesData(): any {
   }
 }
 
-export function* handleSearchVisibilityStatus(): any {
+export function* handleSearchVisibilityStatus(): Generator<any, void, Boolean> {
   yield put(setSearchVisibilityStatus(yield call(searchSelectVisible)));
 }
 
-export function* handleUserSearch(): any {
+export function* handleUserSearch(): Generator<any, void, unknown> {
   yield searchSelect(userSearchFilter);
   yield put(setUserSearch(text));
 }
 
-export function* handleSearchInput(): any {
+export function* handleSearchInput(): Generator<any, void, unknown> {
   yield put(setSearchInput(userSearchType));
 }
 
-export function* handleFilterActivityList(): any {
+export function* handleFilterActivityList(): Generator<any, void, unknown> {
   yield put(setActivitiesData(filteredActivityList));
 }
 
-export function* handleFilterActivityListNU(): any {
+export function* handleFilterActivityListNU(): Generator<any, void, unknown> {
   yield put(setActivitiesDataNU(filteredActivityListNU));
 }

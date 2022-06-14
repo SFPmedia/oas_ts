@@ -1,13 +1,14 @@
 // Variable getters
-export const GET_ACTIVITIESDATA = "GET_ACTIVITIESDATA";
-export const GET_POSITIONACCURACY = "GET_POSITIONACCURACY";
-export const GET_COOKIECONSENTSTATUS = "GET_COOKIECONSENTSTATUS";
-export const GET_FORCEUPDATEACTIVITIESDATA = "GET_FORCEUPDATEACTIVITIESDATA";
-export const GET_SEARCHVISIBILITYSTATUS = "GET_SEARCHVISIBILITYSTATUS";
-export const GET_USERSEARCH = "GET_USERSEARCH";
-export const GET_SEARCHINPUT = "GET_SEARCHINPUT";
-export const GET_FILTERACTIVITYLIST = "GET_FILTERACTIVITYLIST";
-export const GET_FILTERACTIVITYLISTNU = "GET_FILTERACTIVITYLISTNU";
+export const GET_ACTIVITIESDATA: string = "GET_ACTIVITIESDATA";
+export const GET_POSITIONACCURACY: string = "GET_POSITIONACCURACY";
+export const GET_COOKIECONSENTSTATUS: string = "GET_COOKIECONSENTSTATUS";
+export const GET_FORCEUPDATEACTIVITIESDATA: string =
+  "GET_FORCEUPDATEACTIVITIESDATA";
+export const GET_SEARCHVISIBILITYSTATUS: string = "GET_SEARCHVISIBILITYSTATUS";
+export const GET_USERSEARCH: string = "GET_USERSEARCH";
+export const GET_SEARCHINPUT: string = "GET_SEARCHINPUT";
+export const GET_FILTERACTIVITYLIST: string = "GET_FILTERACTIVITYLIST";
+export const GET_FILTERACTIVITYLISTNU: string = "GET_FILTERACTIVITYLISTNU";
 
 // Variable setters
 export const SET_ACTIVITIES: string = "SET_ACTIVITIES";
@@ -50,23 +51,23 @@ export const getFilterActivityListNU = () => ({
 });
 
 // Function setters
-export const setActivitiesData = (activitiesData: any) => ({
+export const setActivitiesData = (activitiesData: String[]) => ({
   type: SET_ACTIVITIES,
   activitiesData,
 });
-export const setActivitiesDataNU = (activitiesData: any) => ({
+export const setActivitiesDataNU = (activitiesData: String[]) => ({
   type: SET_ACTIVITIESNU,
   activitiesData,
 });
-export const setPositionAccuracy = (positionAccuracy: any) => ({
+export const setPositionAccuracy = (positionAccuracy: String) => ({
   type: SET_POSITIONACCURACY,
   positionAccuracy,
 });
-export const setCookieConsentStatus = (cookieConsent: any) => ({
+export const setCookieConsentStatus = (cookieConsent: String | null) => ({
   type: SET_COOKIECONSENTSTATUS,
   cookieConsent,
 });
-export const setSearchVisibilityStatus = (status: any) => ({
+export const setSearchVisibilityStatus = (status: Boolean) => ({
   type: SET_SEARCHSELECTVISIBLESTATUS,
   status,
 });

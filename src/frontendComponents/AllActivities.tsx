@@ -17,30 +17,29 @@ import {
   getUserSearch,
 } from "../redux/actionTypes";
 
-export let example = false;
-export let userSearchFilter = "Name";
+export let userSearchFilter: String = "Name";
 
 export default function AllActivities(): React.ReactElement {
   const activities = useSelector<RootState, SATypes[]>(
     (state) => state.activitiesReducer.activities
   );
-  const userSearch = useSelector<RootState, string>(
+  const userSearch = useSelector<RootState, String>(
     (state) => state.activitiesReducer.userSearch
   );
-  const searchInput = useSelector<RootState, string>(
+  const searchInput = useSelector<RootState, String>(
     (state) => state.activitiesReducer.searchInput
   );
-  const searchSelectVisibleStatus = useSelector<RootState, boolean>(
+  const searchSelectVisibleStatus = useSelector<RootState, Boolean>(
     (state) => state.activitiesReducer.searchSelectVisibleStatus
   );
 
   const dispatch: AppDispatch = useDispatch();
 
-  const handleSearchSelectVisible = () => {
+  const handleSearchSelectVisible = (): void => {
     dispatch(getSearchVisibilityStatus());
   };
 
-  const handleSearchSelect = (Search: string) => {
+  const handleSearchSelect = (Search: String) => {
     userSearchFilter = Search;
     dispatch(getUserSearch());
     dispatch(getSearchInput());
@@ -56,7 +55,7 @@ export default function AllActivities(): React.ReactElement {
   };
 
   // searchSelectColor() highlights the color of the selected search criteria.
-  const searchSelectColor = (searchColor: string) => {
+  const searchSelectColor = (searchColor: String) => {
     if (searchInput === searchColor) {
       return "rgba(255, 222, 113, 1)";
     } else {
