@@ -51,19 +51,19 @@ export const getFilterActivityListNU = () => ({
 });
 
 // Function setters
-export const setActivitiesData = (activitiesData: String[]) => ({
+export const setActivitiesData = (activitiesData: string[]) => ({
   type: SET_ACTIVITIES,
   activitiesData,
 });
-export const setActivitiesDataNU = (activitiesData: String[]) => ({
+export const setActivitiesDataNU = (activitiesData: string[]) => ({
   type: SET_ACTIVITIESNU,
   activitiesData,
 });
-export const setPositionAccuracy = (positionAccuracy: String) => ({
+export const setPositionAccuracy = (positionAccuracy: string) => ({
   type: SET_POSITIONACCURACY,
   positionAccuracy,
 });
-export const setCookieConsentStatus = (cookieConsent: String | null) => ({
+export const setCookieConsentStatus = (cookieConsent: string | null) => ({
   type: SET_COOKIECONSENTSTATUS,
   cookieConsent,
 });

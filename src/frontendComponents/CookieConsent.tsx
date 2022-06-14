@@ -12,7 +12,7 @@ export default function CookieConsent(): React.ReactElement {
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const handleCookieConsent = (status: String) => {
+  const handleCookieConsent = (status: string) => {
     if (status === "true") {
       localStorage.setItem("CookieConsentStatus", "true");
     } else {
@@ -24,7 +24,7 @@ export default function CookieConsent(): React.ReactElement {
   };
 
   const handleCookieConsentDisplay = (): Boolean | null => {
-    const cookieConsentCurrentStatus: String = localStorage.getItem(
+    const cookieConsentCurrentStatus: string = localStorage.getItem(
       "CookieConsentStatus"
     )!;
     if (cookieConsentCurrentStatus === "true") {

@@ -70,8 +70,8 @@ export let filteredActivityList: any;
 
 // Whenever a person types in the search bar, this function filters through the entire list and only returns a list that corresponds with
 // what the user is searching for
-export const filterActivityList = (searchInputProp: String): SATypes[] => {
-  const filterInputValue: String = (
+export const filterActivityList = (searchInputProp: string): SATypes[] => {
+  const filterInputValue: string = (
     document.getElementById("filterInput") as HTMLInputElement
   ).value;
 
@@ -80,11 +80,11 @@ export const filterActivityList = (searchInputProp: String): SATypes[] => {
   );
   let searchResult: SATypes[] = [];
 
-  const searchInput: String = searchInputProp;
+  const searchInput: string = searchInputProp;
 
   getLocalStorage.map((activity: SATypes) => {
-    let filterThisInput: String;
-    const userSearchInput: String = searchInput;
+    let filterThisInput: string;
+    const userSearchInput: string = searchInput;
 
     switch (userSearchInput) {
       case "name":
@@ -138,13 +138,13 @@ export const filterActivityList = (searchInputProp: String): SATypes[] => {
   return (filteredActivityList = searchResult);
 };
 
-export let text: String;
-export let userSearchType: String;
+export let text: string;
+export let userSearchType: string;
 
 // The searchSelect() function allows the user to choose which type of information the filter should search by.
-export const searchSelect = (Search: String) => {
+export const searchSelect = (Search: string) => {
   console.log("Test 1");
-  let searchType: String = Search;
+  let searchType: string = Search;
   console.log("Search = " + searchType);
   console.log("Launch searchSelect action");
   switch (searchType) {
@@ -273,7 +273,7 @@ export const getCurrentLocation = (position: PositionType): SATypes[] => {
 };
 
 export const cookieConsentStatus = (): string | null => {
-  const lsConsentStatus: String | null = localStorage.getItem(
+  const lsConsentStatus: string | null = localStorage.getItem(
     "CookieConsentStatus"
   );
   if (lsConsentStatus === "false") {

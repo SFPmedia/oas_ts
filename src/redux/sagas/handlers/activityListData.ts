@@ -54,7 +54,7 @@ export function* handleGetPositionAccuracy(): Generator<any, void, unknown> {
 export function* handleCookieConsentStatus(): Generator<
   any,
   void,
-  String | null
+  string | null
 > {
   yield put(setCookieConsentStatus(yield call(cookieConsentStatus)));
 }
