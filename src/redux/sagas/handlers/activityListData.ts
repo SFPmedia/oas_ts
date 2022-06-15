@@ -11,6 +11,7 @@ import {
   searchSelect,
   filteredActivityList,
   filteredActivityListNU,
+  activitiesData,
 } from "../../actions";
 import {
   setActivitiesData,
@@ -26,12 +27,12 @@ const call: any = Effects.call;
 
 export function* handleGetActivityListData(): Generator<any, void, string[]> {
   try {
-    let response: string[] = yield call(fetchActivities);
+    let response: string[] = activitiesData;
     let attemptNumber: number = 0;
 
-    while (!response && attemptNumber <= 5) {
+    while (!activitiesData && attemptNumber <= 5) {
       attemptNumber++;
-      response = yield call(fetchActivities);
+      response = activitiesData;
     }
 
     if (response) {

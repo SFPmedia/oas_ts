@@ -4,6 +4,9 @@ import { PositionType, SATypes } from "../customTypes";
 // If data has been found and it is not older than 18 hours. Then that data will be inserted into the "activitiesNU" list. This data will then
 // be used to generate the list.
 // If the 2 conditions are not true. It will retrieve a new set of data from the database on the server, via a webAPI and insert that data into "activitiesNU" instead.
+
+export let activitiesData: string[];
+
 export const fetchActivities = async (): Promise<string[] | undefined> => {
   let localStorageExpirationTimeToNumber: number = JSON.parse(
     localStorage.getItem("lsExpirationTime")!
@@ -17,7 +20,7 @@ export const fetchActivities = async (): Promise<string[] | undefined> => {
     );
     const activities: string[] = getLocalStorage;
     console.log("LocalStorage activities have been found. Using those.");
-    return activities;
+    return (activitiesData = activities);
   } else {
     await fetch("https://sfpmedia.dk/db_api_oas/readActivities.php")
       .then((response: Response) => {
@@ -29,14 +32,14 @@ export const fetchActivities = async (): Promise<string[] | undefined> => {
           "lsExpirationTime",
           JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
         );
-        const getLocalStorage: Object[] = JSON.parse(
+        const getLocalStorage: string[] = JSON.parse(
           localStorage.getItem("activities")!
         );
-        const activities: Object[] = getLocalStorage;
+        const activities: string[] = getLocalStorage;
         console.log(
           "LocalStorage activities were not found. Getting and using new ones."
         );
-        return activities;
+        return (activitiesData = activities);
       });
   }
 };
@@ -53,15 +56,14 @@ export const forceUpdateActivities = async (): Promise<void> => {
         "lsExpirationTime",
         JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
       );
-      const getLocalStorage: Object[] = JSON.parse(
+      const getLocalStorage: string[] = JSON.parse(
         localStorage.getItem("activities")!
       );
-      const activities: Object[] = getLocalStorage;
+      const activities: string[] = getLocalStorage;
       console.log("Forced update of localstorage data and react state.");
       alert(
         "Forced update successful. The list has the newest data straight from the database."
       );
-      console.log(activities);
       return activities;
     });
 };

@@ -9,7 +9,11 @@ import CookieConsent from "./frontendComponents/CookieConsent";
 import { CssBaseline, Grid, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
-import { accuracySuccess, accuracySuccessResult } from "./redux/actions";
+import {
+  accuracySuccess,
+  accuracySuccessResult,
+  fetchActivities,
+} from "./redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState, SATypes } from "./customTypes";
 import { getActivitiesData, getPositionAccuracy } from "./redux/actionTypes";
@@ -24,11 +28,7 @@ function App(): React.ReactElement {
   );
 
   useEffect(() => {
-    if (activities.length < 1) {
-      dispatch(getActivitiesData());
-    } else {
-      console.log("The activities are ready");
-    }
+    fetchActivities();
 
     if (!positionAccuracy) {
       navigator.geolocation.getCurrentPosition(accuracySuccess);
@@ -48,6 +48,12 @@ function App(): React.ReactElement {
       setTimeout(accuracyUpdater, 500);
     } else {
       console.log("Position accuracy is ready");
+    }
+
+    if (activities.length < 1) {
+      dispatch(getActivitiesData());
+    } else {
+      console.log("The activities are ready");
     }
   });
 
