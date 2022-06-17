@@ -27,7 +27,7 @@ export function* watcherSaga(): Generator<ForkEffect<never>, void, unknown> {
   yield takeLatest(GET_POSITIONACCURACY, handleGetPositionAccuracy);
   yield takeLatest(GET_COOKIECONSENTSTATUS, handleCookieConsentStatus);
   yield throttle(
-    2000,
+    3000,
     GET_FORCEUPDATEACTIVITIESDATA,
     handleForceUpdateActivitiesData
   );

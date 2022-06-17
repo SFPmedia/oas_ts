@@ -1,17 +1,14 @@
 import * as Effects from "redux-saga/effects";
 import { userSearchFilter } from "../../../frontendComponents/AllActivities";
 import {
-  fetchActivities,
   cookieConsentStatus,
   accuracySuccessResult,
-  forceUpdateActivities,
   searchSelectVisible,
   text,
   userSearchType,
   searchSelect,
   filteredActivityList,
   filteredActivityListNU,
-  activitiesData,
 } from "../../actions";
 import {
   setActivitiesData,
@@ -27,17 +24,36 @@ const call: any = Effects.call;
 
 export function* handleGetActivityListData(): Generator<any, void, string[]> {
   try {
-    let response: string[] = activitiesData;
-    let attemptNumber: number = 0;
+    const response: any = yield call(
+      fetch,
+      "https://sfpmedia.dk/db_api_oas/readActivities.php"
+    );
+    const activities: string[] = yield response.json();
+    const getLocalStorageActivities: string[] = JSON.parse(
+      localStorage.getItem("activities")!
+    );
+    let localStorageExpirationTimeToNumber: number = JSON.parse(
+      localStorage.getItem("lsExpirationTime")!
+    );
 
-    while (!activitiesData && attemptNumber <= 5) {
-      attemptNumber++;
-      response = activitiesData;
-    }
-
-    if (response) {
-      yield put(setActivitiesData(response));
-      yield put(setActivitiesDataNU(response));
+    if (
+      localStorage.getItem("activities") &&
+      new Date().getTime() <= localStorageExpirationTimeToNumber
+    ) {
+      console.log("LocalStorage activities have been found. Using those.");
+      yield put(setActivitiesData(getLocalStorageActivities));
+      yield put(setActivitiesDataNU(getLocalStorageActivities));
+    } else {
+      localStorage.setItem("activities", JSON.stringify(activities));
+      localStorage.setItem(
+        "lsExpirationTime",
+        JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
+      );
+      console.log(
+        "LocalStorage activities were not found. Getting and using new ones."
+      );
+      yield put(setActivitiesData(activities));
+      yield put(setActivitiesDataNU(activities));
     }
   } catch (error) {
     console.log(error);
@@ -65,18 +81,23 @@ export function* handleForceUpdateActivitiesData(): Generator<
   void,
   string[]
 > {
-  let response: string[] = yield call(forceUpdateActivities);
-  let attemptNumber: number = 0;
+  const response: any = yield call(
+    fetch,
+    "https://sfpmedia.dk/db_api_oas/readActivities.php"
+  );
+  const activities: string[] = yield response.json();
+  alert(
+    "Forced update successful. The list has the newest data straight from the database."
+  );
 
-  while (!response && attemptNumber <= 5) {
-    attemptNumber++;
-    response = yield call(fetchActivities);
-  }
+  localStorage.setItem("activities", JSON.stringify(activities));
+  localStorage.setItem(
+    "lsExpirationTime",
+    JSON.stringify(new Date().getTime() + 1000 * 60 * 60 * 18)
+  );
 
-  if (response) {
-    yield put(setActivitiesData(response));
-    yield put(setActivitiesDataNU(response));
-  }
+  yield put(setActivitiesData(activities));
+  yield put(setActivitiesDataNU(activities));
 }
 
 export function* handleSearchVisibilityStatus(): Generator<any, void, Boolean> {
