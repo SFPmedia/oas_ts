@@ -1,4 +1,4 @@
-import { ForkEffect, takeLatest } from "redux-saga/effects";
+import { ForkEffect, takeLatest, throttle } from "redux-saga/effects";
 import {
   handleGetActivityListData,
   handleGetPositionAccuracy,
@@ -26,7 +26,8 @@ export function* watcherSaga(): Generator<ForkEffect<never>, void, unknown> {
   yield takeLatest(GET_ACTIVITIESDATA, handleGetActivityListData);
   yield takeLatest(GET_POSITIONACCURACY, handleGetPositionAccuracy);
   yield takeLatest(GET_COOKIECONSENTSTATUS, handleCookieConsentStatus);
-  yield takeLatest(
+  yield throttle(
+    2000,
     GET_FORCEUPDATEACTIVITIESDATA,
     handleForceUpdateActivitiesData
   );
