@@ -18,6 +18,8 @@ const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
+          maxWidth: "100% !important",
+          marginTop: "1em",
           backgroundColor: lightGreen[50],
           borderRadius: "10px",
           paddingBottom: "0.5em",
@@ -52,6 +54,18 @@ const theme = createTheme({
             },
             ".MuiTypography-root": {
               marginTop: "2em",
+            },
+            ".filterAreaNU": {
+              display: "flex",
+              marginLeft: "2em",
+            },
+            ".filterListButton": {
+              height: "3em",
+              marginLeft: "2em",
+            },
+            ".SAGM": {
+              display: "flex",
+              justifyContent: "center",
             },
           },
         },
@@ -89,6 +103,29 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: lightGreen[100],
+        },
+      },
+    },
+    MuiGrid: {
+      styleOverrides: {
+        item: {
+          ".SAGM": {
+            display: "flex",
+            justifyContent: "center",
+          } /*
+          ".ActivityGeneralInformation": {
+            width: "25%",
+          },
+          ".ActivityLocalLocation": {
+            width: "25%",
+          },
+          ".ActivityPracticalInfo": {
+            width: "25%",
+          },
+          ".ActivityGlobalPosition": {
+            width: "25%",
+          },
+        */,
         },
       },
     },

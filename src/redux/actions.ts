@@ -1,6 +1,11 @@
 import { PositionType, SATypes } from "../customTypes";
 
 export let filteredActivityList: any;
+export let filteredActivityListNU: any;
+export let text: string;
+export let userSearchType: string;
+export let searchSelectVisibilityStatus: Boolean = false;
+export let accuracySuccessResult: string;
 
 // Whenever a person types in the search bar, this function filters through the entire list and only returns a list that corresponds with
 // what the user is searching for
@@ -8,12 +13,8 @@ export const filterActivityList = (searchInputProp: string): SATypes[] => {
   const filterInputValue: string = (
     document.getElementById("filterInput") as HTMLInputElement
   ).value;
-
-  const getLocalStorage: SATypes[] = JSON.parse(
-    localStorage.getItem("activities")!
-  );
+  const getLocalStorage: SATypes[] = filteredActivityListNU;
   let searchResult: SATypes[] = [];
-
   const searchInput: string = searchInputProp;
 
   getLocalStorage.map((activity: SATypes) => {
@@ -68,19 +69,12 @@ export const filterActivityList = (searchInputProp: string): SATypes[] => {
       return null;
     }
   });
-  console.log(searchResult);
   return (filteredActivityList = searchResult);
 };
 
-export let text: string;
-export let userSearchType: string;
-
 // The searchSelect() function allows the user to choose which type of information the filter should search by.
 export const searchSelect = (Search: string) => {
-  console.log("Test 1");
   let searchType: string = Search;
-  console.log("Search = " + searchType);
-  console.log("Launch searchSelect action");
   switch (searchType) {
     case "Name":
       text = " Name";
@@ -131,10 +125,7 @@ export const searchSelect = (Search: string) => {
       text = " Name";
       userSearchType = "name";
   }
-  console.log("End of searchSelect action");
 };
-
-export let searchSelectVisibilityStatus: Boolean = false;
 
 // Determines whether or not the list is shown or not, when the button "SEARCH BY" is clicked.
 export const searchSelectVisible = async (): Promise<Boolean> => {
@@ -147,8 +138,6 @@ export const searchSelectVisible = async (): Promise<Boolean> => {
   }
 };
 
-export let accuracySuccessResult: string;
-
 export const accuracySuccess = async (
   position: PositionType
 ): Promise<string> => {
@@ -156,8 +145,6 @@ export const accuracySuccess = async (
   accuracySuccessResult = accuracyToKiloMeter.toString().substring(0, 4);
   return accuracySuccessResult;
 };
-
-export let filteredActivityListNU: any;
 
 export const getCurrentLocation = (position: PositionType): SATypes[] => {
   let searchResultNU: SATypes[] = [];

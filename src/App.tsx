@@ -61,15 +61,9 @@ function App(): React.ReactElement {
             path="/"
             element={
               <ThemeProvider theme={theme}>
-                <Typography variant="h1" textAlign="center">
-                  Outdoor Activities
-                </Typography>
                 <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={12} md={10} lg={6} xl={5}>
+                  <Grid item xs={12} md={12} lg={11} xl={10}>
                     <AllActivities />
-                  </Grid>
-                  <Grid item xs={12} md={10} lg={6} xl={5}>
-                    <AllActivitiesNU />
                   </Grid>
                   <CookieConsent />
                 </Grid>

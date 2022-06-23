@@ -32,8 +32,16 @@ export default function SingularActivity(props: SATypes): React.ReactElement {
           <AccordionDetails>
             <CardContent>
               <Grid container justifyContent="center">
-                <Grid item xs={6} md={6} lg={6} xl={6}>
-                  <div id={"AI" + props.id}>
+                <Grid container item xs={12} md={12} lg={6} xl={6} spacing={2}>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    className="ActivityGeneralInformation"
+                    id={"AI" + props.id}
+                  >
                     <Typography variant="h4">General Info</Typography>
                     {props.type ? (
                       <Typography variant="body2">
@@ -76,10 +84,16 @@ export default function SingularActivity(props: SATypes): React.ReactElement {
                         Not available
                       </Typography>
                     )}
-                  </div>
-                </Grid>
-                <Grid item xs={6} md={6} lg={6} xl={6}>
-                  <div className="ActivityLocalLocation" id={"ALL" + props.id}>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    className="ActivityLocalLocation"
+                    id={"ALL" + props.id}
+                  >
                     <Typography variant="h4">National Scale</Typography>
                     {props.city ? (
                       <Typography variant="body2">
@@ -111,11 +125,14 @@ export default function SingularActivity(props: SATypes): React.ReactElement {
                         Not available
                       </Typography>
                     )}
-                  </div>
-                </Grid>
-                <Grid item xs={6} md={6} lg={6} xl={6}>
-                  <div
-                    className="ActivityGeneralInformation"
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    className="ActivityPracticalInfo"
                     id={"AGI" + props.id}
                   >
                     <Typography variant="h4">Practical Info</Typography>
@@ -166,10 +183,16 @@ export default function SingularActivity(props: SATypes): React.ReactElement {
                         Not available
                       </Typography>
                     )}
-                  </div>
-                </Grid>
-                <Grid item xs={6} md={6} lg={6} xl={6}>
-                  <div className="ActivityGlobalPosition" id={"AGP" + props.id}>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    lg={6}
+                    xl={6}
+                    className="ActivityGlobalPosition"
+                    id={"AGP" + props.id}
+                  >
                     <Typography variant="h4">Global Scale</Typography>
                     {props.country ? (
                       <Typography variant="body2">
@@ -201,16 +224,16 @@ export default function SingularActivity(props: SATypes): React.ReactElement {
                         Not available
                       </Typography>
                     )}
-                  </div>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} md={12} lg={10} xl={10}>
+                <Grid item xs={12} md={12} lg={6} xl={6} className="SAGM">
                   <iframe
                     title={"Google Maps navigation for " + props.name}
                     key={props.id}
                     className="GoogleMap"
                     id={"GM" + props.id}
                     src={props.geolocation}
-                    width="100%"
+                    width="80%"
                     height="450"
                     loading="lazy"
                   ></iframe>

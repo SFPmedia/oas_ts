@@ -4,11 +4,18 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../componentStyles/ActivityListTheme";
-import { Container, Button, Typography, TextField } from "@mui/material";
+import {
+  Container,
+  Button,
+  Typography,
+  TextField,
+  Tooltip,
+} from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
 import SingularActivity from "./SingularActivity";
 import { useDispatch, useSelector } from "react-redux";
-import { filterActivityList } from "../redux/actions";
-import { RootState, AppDispatch, SATypes } from "../customTypes";
+import { filterActivityList, getCurrentLocation } from "../redux/actions";
+import { RootState, AppDispatch, SATypes, PositionType } from "../customTypes";
 import {
   getFilterActivityList,
   getForceUpdateActivitiesData,
@@ -32,8 +39,20 @@ export default function AllActivities(): React.ReactElement {
   const searchSelectVisibleStatus = useSelector<RootState, Boolean>(
     (state) => state.activitiesReducer.searchSelectVisibleStatus
   );
+  const positionAccuracy = useSelector<RootState, number | null>(
+    (state) => state.activitiesReducer.positionAccuracy
+  );
 
   const dispatch: AppDispatch = useDispatch();
+
+  const handleGetCurrentLocation = (position: PositionType) => {
+    getCurrentLocation(position);
+    //return dispatch(getFilterActivityList());
+  };
+
+  // Run the action to get an intial value on the variable "filteredActivityListNU", with which the function
+  // filterActivityList can work with.
+  navigator.geolocation.getCurrentPosition(handleGetCurrentLocation);
 
   const handleSearchSelectVisible = (): void => {
     dispatch(getSearchVisibilityStatus());
@@ -51,6 +70,10 @@ export default function AllActivities(): React.ReactElement {
 
   const handleFilterActivityList = () => {
     filterActivityList(searchInput);
+  };
+
+  const handleFilterActivityListClick = () => {
+    filterActivityList(searchInput);
     dispatch(getFilterActivityList());
   };
 
@@ -66,11 +89,17 @@ export default function AllActivities(): React.ReactElement {
   return (
     <ThemeProvider theme={theme}>
       <Container>
-        <Button variant="contained" onClick={handleForceUpdate}>
-          Force Latest Update
-        </Button>
+        <div className="activityListTop">
+          <Button variant="contained" onClick={handleForceUpdate}>
+            Force Latest Update
+          </Button>
+
+          <Tooltip title={"User accuracy: " + positionAccuracy + "km"}>
+            <InfoIcon />
+          </Tooltip>
+        </div>
         <Typography variant="h2" textAlign="center">
-          All Activities
+          Outdoor Activities
         </Typography>
 
         <div id="filterArea">
@@ -200,6 +229,31 @@ export default function AllActivities(): React.ReactElement {
             variant="standard"
             onChange={handleFilterActivityList}
           />
+          <div className="filterAreaNU">
+            <TextField
+              id="filterInputNU"
+              label={"Search near you"}
+              type="number"
+              variant="standard"
+              defaultValue={50}
+              required
+              onChange={() =>
+                navigator.geolocation.getCurrentPosition(
+                  handleGetCurrentLocation
+                )
+              }
+            />
+            <Typography variant="body2" color="initial">
+              km
+            </Typography>
+          </div>
+          <Button
+            className="filterListButton"
+            variant="contained"
+            onClick={() => handleFilterActivityListClick()}
+          >
+            Filter List
+          </Button>
         </div>
 
         {activities.length > 0 ? (

@@ -24,7 +24,7 @@ export default function AllActivities(): React.ReactElement {
   const dispatch: AppDispatch = useDispatch();
 
   const handleGetCurrentLocation = (position: PositionType) => {
-    getCurrentLocation(position);
+    //getCurrentLocation(position);
     return dispatch(getFilterActivityListNU());
   };
 
