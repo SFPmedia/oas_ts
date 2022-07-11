@@ -26,7 +26,6 @@ const activitiesReducer = (state = initialActivitiesState, action: any) => {
   const searchVisibilityStatus = action.status;
   const userSearch = action.selection;
   const searchInput = action.input;
-  console.log(action);
   switch (action.type) {
     case SET_COOKIECONSENTSTATUS:
       return {

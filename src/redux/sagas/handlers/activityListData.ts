@@ -1,4 +1,5 @@
 import * as Effects from "redux-saga/effects";
+import { SATypes } from "../../../customTypes";
 import { userSearchFilter } from "../../../frontendComponents/AllActivities";
 import {
   cookieConsentStatus,
@@ -28,8 +29,8 @@ export function* handleGetActivityListData(): Generator<any, void, string[]> {
       fetch,
       "https://sfpmedia.dk/db_api_oas/readActivities.php"
     );
-    const activities: string[] = yield response.json();
-    const getLocalStorageActivities: string[] = JSON.parse(
+    const activities: any = yield response.json();
+    const getLocalStorageActivities: SATypes[] = JSON.parse(
       localStorage.getItem("activities")!
     );
     let localStorageExpirationTimeToNumber: number = JSON.parse(
@@ -85,7 +86,7 @@ export function* handleForceUpdateActivitiesData(): Generator<
     fetch,
     "https://sfpmedia.dk/db_api_oas/readActivities.php"
   );
-  const activities: string[] = yield response.json();
+  const activities: any[] = yield response.json();
   alert(
     "Forced update successful. The list has the newest data straight from the database."
   );

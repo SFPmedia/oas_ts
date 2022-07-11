@@ -1,3 +1,5 @@
+import { SATypes } from "../customTypes";
+
 // Variable getters
 export const GET_ACTIVITIESDATA: string = "GET_ACTIVITIESDATA";
 export const GET_POSITIONACCURACY: string = "GET_POSITIONACCURACY";
@@ -51,11 +53,11 @@ export const getFilterActivityListNU = () => ({
 });
 
 // Function setters
-export const setActivitiesData = (activitiesData: string[]) => ({
+export const setActivitiesData = (activitiesData: SATypes[]) => ({
   type: SET_ACTIVITIES,
   activitiesData,
 });
-export const setActivitiesDataNU = (activitiesData: string[]) => ({
+export const setActivitiesDataNU = (activitiesData: SATypes[]) => ({
   type: SET_ACTIVITIESNU,
   activitiesData,
 });

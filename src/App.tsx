@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navigation from "./frontendComponents/Navigation";
 import AboutPage from "./frontendComponents/AboutPage";
 import AllActivities from "./frontendComponents/AllActivities";
-import AllActivitiesNU from "./frontendComponents/AllActivitiesNU";
 import FourOhFour from "./frontendComponents/FourOhFour";
 import CookieConsent from "./frontendComponents/CookieConsent";
-import { CssBaseline, Grid, Typography } from "@mui/material";
+import { CssBaseline, Grid } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./componentStyles/ActivityListTheme";
 import { accuracySuccess, accuracySuccessResult } from "./redux/actions";
@@ -61,8 +60,8 @@ function App(): React.ReactElement {
             path="/"
             element={
               <ThemeProvider theme={theme}>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={12} md={12} lg={11} xl={10}>
+                <Grid container justifyContent="center">
+                  <Grid item xs={12} md={12} lg={10} xl={10}>
                     <AllActivities />
                   </Grid>
                   <CookieConsent />

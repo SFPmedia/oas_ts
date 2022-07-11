@@ -9,8 +9,7 @@ import Container from "@mui/material/Container";
 import SingularActivity from "./SingularActivity";
 import InfoIcon from "@mui/icons-material/Info";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentLocation } from "../redux/actions";
-import { RootState, AppDispatch, PositionType, SATypes } from "../customTypes";
+import { RootState, AppDispatch, SATypes } from "../customTypes";
 import { getFilterActivityListNU } from "../redux/actionTypes";
 
 export default function AllActivities(): React.ReactElement {
@@ -23,8 +22,7 @@ export default function AllActivities(): React.ReactElement {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const handleGetCurrentLocation = (position: PositionType) => {
-    //getCurrentLocation(position);
+  const handleGetCurrentLocation = () => {
     return dispatch(getFilterActivityListNU());
   };
 

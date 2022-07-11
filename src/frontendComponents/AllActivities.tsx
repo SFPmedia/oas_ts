@@ -47,7 +47,6 @@ export default function AllActivities(): React.ReactElement {
 
   const handleGetCurrentLocation = (position: PositionType) => {
     getCurrentLocation(position);
-    //return dispatch(getFilterActivityList());
   };
 
   // Run the action to get an intial value on the variable "filteredActivityListNU", with which the function

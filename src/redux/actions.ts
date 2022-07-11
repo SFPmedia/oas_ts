@@ -1,7 +1,7 @@
 import { PositionType, SATypes } from "../customTypes";
 
-export let filteredActivityList: any;
-export let filteredActivityListNU: any;
+export let filteredActivityList: SATypes[];
+export let filteredActivityListNU: SATypes[];
 export let text: string;
 export let userSearchType: string;
 export let searchSelectVisibilityStatus: Boolean = false;

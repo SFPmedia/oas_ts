@@ -112,20 +112,7 @@ const theme = createTheme({
           ".SAGM": {
             display: "flex",
             justifyContent: "center",
-          } /*
-          ".ActivityGeneralInformation": {
-            width: "25%",
           },
-          ".ActivityLocalLocation": {
-            width: "25%",
-          },
-          ".ActivityPracticalInfo": {
-            width: "25%",
-          },
-          ".ActivityGlobalPosition": {
-            width: "25%",
-          },
-        */,
         },
       },
     },
